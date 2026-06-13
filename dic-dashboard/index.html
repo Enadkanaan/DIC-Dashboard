@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Startup Portfolio Dashboard — DIC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+<!-- ── Sidebar ─────────────────────────────────────────── -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-icon">DIC</div>
+    <div>
+      <div class="brand-name">DIC Portfolio</div>
+      <div class="brand-sub">Digital Innovation Dept.</div>
+    </div>
+  </div>
+
+  <div class="sidebar-section-label">Main</div>
+  <nav>
+    <a href="#" class="active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </a>
+  </nav>
+
+  <div class="sidebar-section-label">Sections</div>
+  <nav>
+    <a href="#kpis">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      KPIs
+    </a>
+    <a href="#charts">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      Charts
+    </a>
+    <a href="#milestones">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      Milestones
+    </a>
+    <a href="#portfolio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      Portfolio
+    </a>
+    <a href="#intervention">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Intervention
+    </a>
+    <a href="#data-quality">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      Data Quality
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="https://YOUR_ORG.github.io/dic-portal/" target="_blank">→ Data Entry Portal</a>
+    <div>Prototype v2.0 · <span id="sb-period">—</span></div>
+    <div style="margin-top:4px">GitHub Pages · Supabase</div>
+  </div>
+</aside>
+
+<!-- ── Main content ─────────────────────────────────────── -->
+<main class="main-content">
+
+  <!-- Page header -->
+  <div class="page-header" id="top">
+    <div>
+      <h1>Startup Portfolio Dashboard</h1>
+      <p>Management view of startup progress, outcomes, risks, and cohort performance.</p>
+    </div>
+    <div class="header-meta">
+      <span><span class="live-dot"></span> Live</span>
+      <span id="hdr-updated">—</span>
+      <span id="hdr-coverage">—</span>
+      <a href="https://YOUR_ORG.github.io/dic-portal/" target="_blank" class="btn btn-primary btn-sm">+ Submit Data</a>
+    </div>
+  </div>
+
+  <!-- ── Filter bar ──────────────────────────────────────── -->
+  <div class="filter-bar" id="filter-bar">
+    <label>COHORT</label>
+    <select id="f-cohort">
+      <option value="">All Cohorts</option>
+      <option>Cohort 2024</option><option>Cohort 2025</option><option>Cohort 2026</option>
+    </select>
+
+    <label>PROGRAM</label>
+    <select id="f-program">
+      <option value="">All Programs</option>
+      <option>Idea Camp</option><option>Incubation</option>
+      <option>Investor Readiness</option><option>Go-To-Market</option>
+    </select>
+
+    <label>SECTOR</label>
+    <select id="f-sector">
+      <option value="">All Sectors</option>
+      <option>AI</option><option>SaaS</option><option>GovTech</option>
+      <option>FinTech</option><option>EdTech</option><option>HealthTech</option>
+    </select>
+
+    <label>STAGE</label>
+    <select id="f-stage">
+      <option value="">All Stages</option>
+      <option>Idea</option><option>MVP</option>
+      <option>Early Revenue</option><option>Growth</option><option>Scale</option>
+    </select>
+
+    <label>RISK</label>
+    <select id="f-risk">
+      <option value="">All Risk</option>
+      <option>Low</option><option>Medium</option><option>High</option><option>No Update</option>
+    </select>
+
+    <div class="filter-sep"></div>
+
+    <label>MONTH</label>
+    <input type="month" id="f-month" />
+
+    <button class="btn-reset" id="reset-filters">Reset</button>
+
+    <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+      <input type="search" class="search-input" id="global-search" placeholder="Search startups…" style="min-width:180px" />
+    </div>
+  </div>
+
+  <!-- ── KPI Cards ───────────────────────────────────────── -->
+  <div class="kpi-grid" id="kpis">
+    <div class="kpi-card kpi-teal">
+      <div class="kpi-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        Active Startups
+      </div>
+      <div class="kpi-value" id="kpi-startups">—</div>
+      <div class="kpi-delta neutral" id="kpi-startups-d">Loading…</div>
+    </div>
+    <div class="kpi-card kpi-green">
+      <div class="kpi-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+        Jobs Created
+      </div>
+      <div class="kpi-value" id="kpi-jobs">—</div>
+      <div class="kpi-delta up" id="kpi-jobs-d">—</div>
+    </div>
+    <div class="kpi-card kpi-navy">
+      <div class="kpi-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        Funding Raised
+      </div>
+      <div class="kpi-value" id="kpi-funding">—</div>
+      <div class="kpi-delta neutral" id="kpi-funding-d">—</div>
+    </div>
+    <div class="kpi-card kpi-teal">
+      <div class="kpi-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Revenue (Monthly)
+      </div>
+      <div class="kpi-value" id="kpi-revenue">—</div>
+      <div class="kpi-delta up" id="kpi-revenue-d">—</div>
+    </div>
+    <div class="kpi-card kpi-amber">
+      <div class="kpi-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        Milestone Completion
+      </div>
+      <div class="kpi-value" id="kpi-milestones">—</div>
+      <div class="kpi-delta neutral" id="kpi-milestones-d">—</div>
+    </div>
+    <div class="kpi-card kpi-red">
+      <div class="kpi-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        At-Risk Startups
+      </div>
+      <div class="kpi-value" id="kpi-risk">—</div>
+      <div class="kpi-delta down" id="kpi-risk-d">Require intervention</div>
+    </div>
+  </div>
+
+  <!-- ── Chart Row 1: 3 equal columns ───────────────────── -->
+  <div class="chart-row-3" id="charts">
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div><h3>Portfolio Health</h3><p>Startups by risk &amp; activity status</p></div>
+      </div>
+      <div class="chart-card-body"><canvas id="chart-health"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div><h3>Cohort Performance</h3><p>Jobs created &amp; milestone completion</p></div>
+      </div>
+      <div class="chart-card-body"><canvas id="chart-cohort"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div><h3>Sector Distribution</h3><p>Startups by sector / track</p></div>
+      </div>
+      <div class="chart-card-body"><canvas id="chart-sector"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ── Chart Row 2: trend (wider) + stage funnel ──────── -->
+  <div class="chart-row-2">
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div><h3>Economic Impact Trend</h3><p>Monthly revenue &amp; funding raised — last 6 months</p></div>
+      </div>
+      <div class="chart-card-body"><canvas id="chart-trend"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-card-header">
+        <div><h3>Stage Funnel</h3><p>Startups by development stage</p></div>
+      </div>
+      <div class="chart-card-body"><canvas id="chart-stage"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ── Milestone Progress Table ───────────────────────── -->
+  <div class="section-header" id="milestones">
+    <div><h2>Progress Against Milestones</h2><p>Startup-level milestone completion and overdue status</p></div>
+  </div>
+  <div class="milestone-table-card">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Startup</th><th>Cohort</th><th>Completed</th>
+            <th>Progress</th><th>Overdue</th><th>Risk</th>
+          </tr>
+        </thead>
+        <tbody id="milestone-tbody"><tr><td colspan="6" style="text-align:center;padding:24px"><div class="spinner"></div></td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── Startup Portfolio Table ────────────────────────── -->
+  <div class="section-header" id="portfolio">
+    <div><h2>Startup Portfolio</h2><p>Click any row to view full startup details. Columns are sortable.</p></div>
+    <button class="btn btn-secondary btn-sm" onclick="window.print()">Print</button>
+  </div>
+  <div class="milestone-table-card">
+    <div class="table-wrap">
+      <table id="portfolio-table">
+        <thead>
+          <tr>
+            <th data-col="name">STARTUP</th>
+            <th data-col="cohort">COHORT</th>
+            <th data-col="sector">SECTOR</th>
+            <th data-col="stage">STAGE</th>
+            <th data-col="program_owner">PROGRAM OWNER</th>
+            <th data-col="revenue">REVENUE (MO.)</th>
+            <th data-col="funding">FUNDING RAISED</th>
+            <th data-col="jobs">JOBS</th>
+            <th data-col="milestones">MILESTONES</th>
+            <th data-col="risk_level">RISK</th>
+            <th data-col="last_update">LAST UPDATE</th>
+            <th data-col="completeness">COMPLETENESS</th>
+            <th data-col="verify">VERIFICATION</th>
+          </tr>
+        </thead>
+        <tbody id="portfolio-tbody"><tr><td colspan="13" style="text-align:center;padding:24px"><div class="spinner"></div></td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── Intervention List ──────────────────────────────── -->
+  <div class="section-header" id="intervention">
+    <div><h2>Startup Intervention List</h2><p>Startups requiring management attention or program support</p></div>
+    <a href="https://YOUR_ORG.github.io/dic-portal/" target="_blank" class="btn btn-primary btn-sm">Log Intervention</a>
+  </div>
+  <div class="intervention-card">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Startup</th><th>Issue / Reason</th><th>Risk Level</th><th>Program Owner</th><th>Support Required</th><th>Verification</th></tr>
+        </thead>
+        <tbody id="intervention-tbody"><tr><td colspan="6" style="text-align:center;padding:20px"><div class="spinner"></div></td></tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── Data Quality Panel ─────────────────────────────── -->
+  <div class="section-header" id="data-quality">
+    <div><h2>Data Quality Panel</h2><p>Completeness and update status across the portfolio</p></div>
+  </div>
+  <div class="dq-grid">
+    <div class="dq-card good"><div class="dq-num" id="dq-completeness">—</div><div class="dq-lbl">Avg. Data Completeness</div></div>
+    <div class="dq-card warn"><div class="dq-num" id="dq-noupdate">—</div><div class="dq-lbl">No Update (&gt;30 days)</div></div>
+    <div class="dq-card bad"><div class="dq-num" id="dq-evidence">—</div><div class="dq-lbl">Needs Evidence</div></div>
+    <div class="dq-card warn"><div class="dq-num" id="dq-overdue">—</div><div class="dq-lbl">Overdue Milestones</div></div>
+  </div>
+
+</main>
+
+<!-- ── Startup Detail Modal ──────────────────────────────── -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h2 id="modal-name">—</h2>
+        <div id="modal-meta" style="font-size:.75rem;color:var(--text-muted)"></div>
+      </div>
+      <button class="close-modal" id="close-modal">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-grid" id="modal-grid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+<script type="module">
+import { supabase } from './js/supabase-config.js';
+
+// ── Chart colour palette ───────────────────────────────────
+const C = {
+  teal:   '#00897B', tealL: '#00BFA5',
+  maroon: '#8B0000', navy:  '#0D1B2A',
+  amber:  '#D97706', red:   '#DC2626',
+  green:  '#16A34A', grey:  '#94A3B8',
+  blue:   '#1D4ED8',
+  cohortColors: ['#00897B','#8B0000','#1D4ED8'],
+  sectorColors: ['#00897B','#8B0000','#D97706','#1D4ED8','#16A34A','#7C3AED','#94A3B8']
+};
+
+Chart.defaults.font.family = 'Inter, system-ui, sans-serif';
+Chart.defaults.font.size   = 11;
+Chart.defaults.color       = '#64748B';
+
+// ── State ──────────────────────────────────────────────────
+let allStartups = [], allPerf = [], allJobs = [], allFunding = [],
+    allMilestones = [], allVerifications = [];
+let sortCol = 'name', sortDir = 1;
+let charts = {};
+
+// ── Helpers ────────────────────────────────────────────────
+const fmt = n => n >= 1e6 ? `QAR ${(n/1e6).toFixed(1)}M`
+                : n >= 1e3 ? `QAR ${(n/1e3).toFixed(0)}K`
+                : `QAR ${n}`;
+
+function riskBadge(r) {
+  const map = { Low:'badge-low', Medium:'badge-medium', High:'badge-high', 'No Update':'badge-noupdate' };
+  return `<span class="badge ${map[r]||'badge-noupdate'}">${r||'No Update'}</span>`;
+}
+function verifyBadge(v) {
+  const map = { Verified:'badge-verified', Reviewed:'badge-reviewed', 'Needs Evidence':'badge-needs-evidence', Unverified:'badge-unverified' };
+  return `<span class="badge ${map[v]||'badge-unverified'}">${v||'Unverified'}</span>`;
+}
+function progressBar(pct, cls='green') {
+  return `<div class="progress-wrap"><div class="progress-bar"><div class="progress-fill ${cls}" style="width:${pct}%"></div></div><span class="progress-pct">${pct}%</span></div>`;
+}
+function getFilters() {
+  return {
+    cohort:  document.getElementById('f-cohort').value,
+    program: document.getElementById('f-program').value,
+    sector:  document.getElementById('f-sector').value,
+    stage:   document.getElementById('f-stage').value,
+    risk:    document.getElementById('f-risk').value,
+    month:   document.getElementById('f-month').value,
+    search:  document.getElementById('global-search').value.toLowerCase()
+  };
+}
+function applyFilters(list) {
+  const f = getFilters();
+  return list.filter(s =>
+    (!f.cohort  || s.cohort === f.cohort) &&
+    (!f.program || s.program === f.program) &&
+    (!f.sector  || s.sector === f.sector) &&
+    (!f.stage   || s.stage === f.stage) &&
+    (!f.risk    || s.risk_level === f.risk) &&
+    (!f.search  || s.name.toLowerCase().includes(f.search) || (s.dic_id||'').toLowerCase().includes(f.search))
+  );
+}
+
+// ── Load all data ──────────────────────────────────────────
+async function loadData() {
+  const [{ data: s }, { data: p }, { data: j }, { data: fu },
+         { data: m }, { data: v }] = await Promise.all([
+    supabase.from('startups').select('*').order('dic_id'),
+    supabase.from('monthly_performance').select('*').order('reporting_month', { ascending: false }),
+    supabase.from('jobs').select('*').order('reporting_month', { ascending: false }),
+    supabase.from('funding').select('*'),
+    supabase.from('milestones').select('*'),
+    supabase.from('verifications').select('*').order('reporting_month', { ascending: false })
+  ]);
+  allStartups      = s  || [];
+  allPerf          = p  || [];
+  allJobs          = j  || [];
+  allFunding       = fu || [];
+  allMilestones    = m  || [];
+  allVerifications = v  || [];
+
+  const now = new Date();
+  document.getElementById('hdr-updated').textContent = `Updated: ${now.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})}`;
+  document.getElementById('sb-period').textContent = now.toLocaleDateString('en-GB',{month:'long',year:'numeric'});
+
+  render();
+}
+
+// ── Main render ────────────────────────────────────────────
+function render() {
+  const filtered = applyFilters(allStartups);
+  renderKPIs(filtered);
+  renderCharts(filtered);
+  renderMilestoneTable(filtered);
+  renderPortfolioTable(filtered);
+  renderIntervention(filtered);
+  renderDataQuality(filtered);
+}
+
+// ── KPIs ───────────────────────────────────────────────────
+function renderKPIs(startups) {
+  const active = startups.filter(s => s.status === 'Active').length;
+  document.getElementById('kpi-startups').textContent = active;
+  document.getElementById('kpi-startups-d').textContent = `${startups.length} total`;
+
+  // Jobs: sum latest per startup
+  let totalJobs = 0;
+  startups.forEach(s => {
+    const j = allJobs.find(x => x.startup_id === s.id);
+    if (j) totalJobs += (j.fulltime||0) + (j.parttime||0) + (j.interns||0) + (j.contractors||0);
+  });
+  document.getElementById('kpi-jobs').textContent = totalJobs;
+  document.getElementById('kpi-jobs-d').textContent = 'Cumulative';
+
+  // Funding
+  let totalFunding = 0;
+  allFunding.filter(f => startups.find(s => s.id === f.startup_id))
+    .forEach(f => totalFunding += (f.amount_received||0));
+  document.getElementById('kpi-funding').textContent = fmt(totalFunding);
+  document.getElementById('kpi-funding-d').textContent = 'Total received';
+
+  // Revenue (latest month per startup)
+  let totalRev = 0;
+  startups.forEach(s => {
+    const p = allPerf.find(x => x.startup_id === s.id);
+    if (p) totalRev += (p.monthly_revenue||0);
+  });
+  document.getElementById('kpi-revenue').textContent = fmt(totalRev);
+  document.getElementById('kpi-revenue-d').textContent = 'Monthly reported';
+
+  // Milestones
+  const sids = new Set(startups.map(s => s.id));
+  const ms = allMilestones.filter(m => sids.has(m.startup_id));
+  const done = ms.filter(m => m.status === 'Completed').length;
+  const pct = ms.length ? Math.round((done / ms.length) * 100) : 0;
+  document.getElementById('kpi-milestones').textContent = pct + '%';
+  document.getElementById('kpi-milestones-d').textContent = `${done} / ${ms.length} completed`;
+
+  // At-risk
+  const atRisk = startups.filter(s => s.risk_level === 'High').length;
+  document.getElementById('kpi-risk').textContent = atRisk;
+  document.getElementById('kpi-risk-d').textContent = 'High risk';
+
+  // Coverage
+  const reported = startups.filter(s => allPerf.find(p => p.startup_id === s.id)).length;
+  document.getElementById('hdr-coverage').textContent = `Coverage: ${reported} / ${startups.length} reported`;
+}
+
+// ── Charts ─────────────────────────────────────────────────
+function renderCharts(startups) {
+  renderHealthChart(startups);
+  renderCohortChart(startups);
+  renderSectorChart(startups);
+  renderTrendChart(startups);
+  renderStageChart(startups);
+}
+
+function destroyChart(id) { if (charts[id]) { charts[id].destroy(); delete charts[id]; } }
+
+function renderHealthChart(startups) {
+  destroyChart('health');
+  const onTrack  = startups.filter(s => s.risk_level === 'Low').length;
+  const watchlist= startups.filter(s => s.risk_level === 'Medium').length;
+  const atRisk   = startups.filter(s => s.risk_level === 'High').length;
+  const dormant  = startups.filter(s => ['Paused','Dormant','Dropped'].includes(s.status)).length;
+  charts['health'] = new Chart(document.getElementById('chart-health'), {
+    type: 'doughnut',
+    data: {
+      labels: ['On Track','Watchlist','At Risk','Dormant / Paused'],
+      datasets: [{ data: [onTrack, watchlist, atRisk, dormant],
+        backgroundColor: [C.teal, C.amber, C.red, C.grey],
+        borderWidth: 2, borderColor: '#fff', hoverOffset: 6 }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: true,
+      cutout: '62%',
+      plugins: {
+        legend: { position: 'bottom', labels: { boxWidth: 10, padding: 10, font: { size: 10 } } }
+      }
+    }
+  });
+}
+
+function renderCohortChart(startups) {
+  destroyChart('cohort');
+  const cohorts = ['Cohort 2024','Cohort 2025','Cohort 2026'];
+  const jobsByCohort = cohorts.map(c => {
+    let total = 0;
+    startups.filter(s => s.cohort === c).forEach(s => {
+      const j = allJobs.find(x => x.startup_id === s.id);
+      if (j) total += (j.fulltime||0) + (j.parttime||0);
+    });
+    return total;
+  });
+  const sids = new Set(startups.map(s => s.id));
+  const msPct = cohorts.map(c => {
+    const cs = startups.filter(s => s.cohort === c);
+    const ms = allMilestones.filter(m => cs.find(s => s.id === m.startup_id));
+    const done = ms.filter(m => m.status === 'Completed').length;
+    return ms.length ? Math.round((done/ms.length)*100) : 0;
+  });
+  charts['cohort'] = new Chart(document.getElementById('chart-cohort'), {
+    type: 'bar',
+    data: {
+      labels: cohorts.map(c => c.replace('Cohort ','')),
+      datasets: [
+        { label: 'Jobs Created', data: jobsByCohort, backgroundColor: C.teal, borderRadius: 4, yAxisID: 'y' },
+        { label: 'Milestone %', data: msPct, backgroundColor: C.maroon, borderRadius: 4, yAxisID: 'y1' }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, padding: 8, font: { size: 10 } } } },
+      scales: {
+        y:  { position: 'left',  title: { display: true, text: 'Jobs', font: { size: 10 } }, grid: { color: '#F1F5F9' } },
+        y1: { position: 'right', title: { display: true, text: '%', font: { size: 10 } }, max: 100, grid: { drawOnChartArea: false } }
+      }
+    }
+  });
+}
+
+function renderSectorChart(startups) {
+  destroyChart('sector');
+  const sectors = {};
+  startups.forEach(s => { sectors[s.sector||'Other'] = (sectors[s.sector||'Other']||0) + 1; });
+  const labels = Object.keys(sectors);
+  charts['sector'] = new Chart(document.getElementById('chart-sector'), {
+    type: 'pie',
+    data: {
+      labels,
+      datasets: [{ data: labels.map(l => sectors[l]),
+        backgroundColor: C.sectorColors,
+        borderWidth: 2, borderColor: '#fff' }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, padding: 8, font: { size: 10 } } } }
+    }
+  });
+}
+
+function renderTrendChart(startups) {
+  destroyChart('trend');
+  const sids = new Set(startups.map(s => s.id));
+  // Build last 6 months
+  const months = [];
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date(); d.setMonth(d.getMonth() - i);
+    months.push(d.toISOString().slice(0,7));
+  }
+  const revByMonth = months.map(m => {
+    return allPerf.filter(p => sids.has(p.startup_id) && p.reporting_month?.startsWith(m))
+      .reduce((s, p) => s + (p.monthly_revenue||0), 0);
+  });
+  const fundByMonth = months.map(m => {
+    return allFunding.filter(f => sids.has(f.startup_id) && f.funding_date?.startsWith(m))
+      .reduce((s, f) => s + (f.amount_received||0), 0);
+  });
+  charts['trend'] = new Chart(document.getElementById('chart-trend'), {
+    type: 'line',
+    data: {
+      labels: months.map(m => { const d = new Date(m+'-01'); return d.toLocaleDateString('en-GB',{month:'short',year:'2-digit'}); }),
+      datasets: [
+        { label: 'Revenue (QAR)', data: revByMonth, borderColor: C.teal, backgroundColor: 'rgba(0,137,123,.08)', fill: true, tension: .4, pointRadius: 4, pointBackgroundColor: C.teal },
+        { label: 'Funding (QAR)', data: fundByMonth, borderColor: C.maroon, backgroundColor: 'rgba(139,0,0,.06)', fill: true, tension: .4, pointRadius: 4, pointBackgroundColor: C.maroon }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, padding: 8, font: { size: 10 } } } },
+      scales: {
+        y: { grid: { color: '#F1F5F9' }, ticks: { callback: v => v >= 1e6 ? (v/1e6).toFixed(1)+'M' : v >= 1e3 ? (v/1e3).toFixed(0)+'K' : v } }
+      }
+    }
+  });
+}
+
+function renderStageChart(startups) {
+  destroyChart('stage');
+  const stages = ['Idea','MVP','Early Revenue','Growth','Scale'];
+  const counts = stages.map(st => startups.filter(s => s.stage === st).length);
+  charts['stage'] = new Chart(document.getElementById('chart-stage'), {
+    type: 'bar',
+    data: {
+      labels: stages,
+      datasets: [{ label: 'Startups', data: counts,
+        backgroundColor: [C.grey, C.amber, C.teal, C.green, C.navy],
+        borderRadius: 5 }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: true,
+      plugins: { legend: { display: false } },
+      scales: { x: { grid: { color: '#F1F5F9' }, ticks: { stepSize: 1 } }, y: { grid: { display: false } } }
+    }
+  });
+}
+
+// ── Milestone table ────────────────────────────────────────
+function renderMilestoneTable(startups) {
+  const sids = new Set(startups.map(s => s.id));
+  const rows = startups.map(s => {
+    const ms = allMilestones.filter(m => m.startup_id === s.id);
+    const done = ms.filter(m => m.status === 'Completed').length;
+    const total = ms.length;
+    const pct = total ? Math.round((done/total)*100) : 0;
+    const overdue = ms.filter(m => m.target_date && new Date(m.target_date) < new Date() && m.status !== 'Completed').length;
+    const barCls = pct >= 70 ? 'green' : pct >= 40 ? 'amber' : 'red';
+    return `<tr>
+      <td><div class="startup-name">${s.name}</div></td>
+      <td>${s.cohort||'—'}</td>
+      <td>${done} / ${total}</td>
+      <td>${progressBar(pct, barCls)}</td>
+      <td>${overdue > 0 ? `<span class="badge badge-overdue">${overdue} overdue</span>` : `<span class="badge badge-ok">0 overdue</span>`}</td>
+      <td>${riskBadge(s.risk_level)}</td>
+    </tr>`;
+  });
+  document.getElementById('milestone-tbody').innerHTML = rows.join('') || '<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--text-muted)">No data.</td></tr>';
+}
+
+// ── Portfolio table ────────────────────────────────────────
+function renderPortfolioTable(startups) {
+  const sorted = [...startups].sort((a, b) => {
+    let va = a[sortCol] || '', vb = b[sortCol] || '';
+    return sortDir * (va > vb ? 1 : va < vb ? -1 : 0);
+  });
+
+  const rows = sorted.map(s => {
+    const perf = allPerf.find(p => p.startup_id === s.id);
+    const jobs = allJobs.find(j => j.startup_id === s.id);
+    const fund = allFunding.filter(f => f.startup_id === s.id).reduce((t, f) => t + (f.amount_received||0), 0);
+    const ms   = allMilestones.filter(m => m.startup_id === s.id);
+    const done = ms.filter(m => m.status === 'Completed').length;
+    const msPct= ms.length ? Math.round((done/ms.length)*100) : 0;
+    const ver  = allVerifications.find(v => v.startup_id === s.id);
+    const totalJobs = jobs ? (jobs.fulltime||0)+(jobs.parttime||0)+(jobs.interns||0)+(jobs.contractors||0) : 0;
+    const lastUpdate = perf?.submitted_at ? new Date(perf.submitted_at).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}) : '—';
+    const barCls = msPct >= 70 ? 'green' : msPct >= 40 ? 'amber' : 'red';
+    return `<tr data-id="${s.id}">
+      <td><div class="startup-name">${s.name}</div><div class="startup-id">${s.dic_id}</div></td>
+      <td>${s.cohort||'—'}</td>
+      <td>${s.sector||'—'}</td>
+      <td>${s.stage||'—'}</td>
+      <td>${s.program_owner||'—'}</td>
+      <td>${perf ? fmt(perf.monthly_revenue||0) : '—'}</td>
+      <td>${fmt(fund)}</td>
+      <td>${totalJobs}</td>
+      <td>${progressBar(msPct, barCls)}</td>
+      <td>${riskBadge(s.risk_level)}</td>
+      <td>${lastUpdate}</td>
+      <td>${perf ? progressBar(Math.min(100, Math.round(Object.values(perf).filter(v => v !== null && v !== '' && v !== 0).length / 14 * 100))) : '—'}</td>
+      <td>${verifyBadge(ver?.verify_status)}</td>
+    </tr>`;
+  });
+
+  document.getElementById('portfolio-tbody').innerHTML = rows.join('') || '<tr><td colspan="13" style="text-align:center;padding:20px;color:var(--text-muted)">No startups match the current filters.</td></tr>';
+
+  // Row click → modal
+  document.querySelectorAll('#portfolio-tbody tr[data-id]').forEach(row => {
+    row.addEventListener('click', () => openModal(row.dataset.id));
+  });
+
+  // Sort headers
+  document.querySelectorAll('#portfolio-table thead th[data-col]').forEach(th => {
+    th.classList.remove('sorted-asc','sorted-desc');
+    if (th.dataset.col === sortCol) th.classList.add(sortDir === 1 ? 'sorted-asc' : 'sorted-desc');
+    th.onclick = () => {
+      if (sortCol === th.dataset.col) sortDir *= -1;
+      else { sortCol = th.dataset.col; sortDir = 1; }
+      renderPortfolioTable(applyFilters(allStartups));
+    };
+  });
+}
+
+// ── Intervention list ──────────────────────────────────────
+function renderIntervention(startups) {
+  const atRisk = startups.filter(s => s.risk_level === 'High' || s.risk_level === 'Medium');
+  const rows = atRisk.map(s => {
+    const ms = allMilestones.filter(m => m.startup_id === s.id);
+    const overdue = ms.filter(m => m.target_date && new Date(m.target_date) < new Date() && m.status !== 'Completed').length;
+    const ver = allVerifications.find(v => v.startup_id === s.id);
+    const issues = [];
+    if (s.risk_level === 'High') issues.push('High risk status');
+    if (overdue > 0) issues.push(`${overdue} overdue milestone${overdue>1?'s':''}`);
+    if (ver?.verify_status === 'Needs Evidence') issues.push('Evidence required');
+    return `<tr>
+      <td><div class="startup-name">${s.name}</div><div class="startup-id">${s.cohort||''}</div></td>
+      <td>${issues.join('; ') || '—'}</td>
+      <td>${riskBadge(s.risk_level)}</td>
+      <td>${s.program_owner||'—'}</td>
+      <td>${ver?.intervention||'—'}</td>
+      <td>${verifyBadge(ver?.verify_status)}</td>
+    </tr>`;
+  });
+  document.getElementById('intervention-tbody').innerHTML = rows.join('') || '<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--text-muted)">No interventions required.</td></tr>';
+}
+
+// ── Data quality ───────────────────────────────────────────
+function renderDataQuality(startups) {
+  const now = new Date();
+  let totalComp = 0, noUpdate = 0, needsEvidence = 0, overdueMs = 0;
+  startups.forEach(s => {
+    const p = allPerf.find(x => x.startup_id === s.id);
+    if (p) {
+      const fields = Object.values(p).filter(v => v !== null && v !== '' && v !== 0).length;
+      totalComp += Math.min(100, Math.round(fields / 14 * 100));
+      const days = (now - new Date(p.submitted_at)) / 86400000;
+      if (days > 30) noUpdate++;
+    } else noUpdate++;
+    const ver = allVerifications.find(v => v.startup_id === s.id);
+    if (ver?.verify_status === 'Needs Evidence') needsEvidence++;
+    allMilestones.filter(m => m.startup_id === s.id).forEach(m => {
+      if (m.target_date && new Date(m.target_date) < now && m.status !== 'Completed') overdueMs++;
+    });
+  });
+  const avgComp = startups.length ? Math.round(totalComp / startups.length) : 0;
+  document.getElementById('dq-completeness').textContent = avgComp + '%';
+  document.getElementById('dq-noupdate').textContent     = noUpdate;
+  document.getElementById('dq-evidence').textContent     = needsEvidence;
+  document.getElementById('dq-overdue').textContent      = overdueMs;
+}
+
+// ── Modal ──────────────────────────────────────────────────
+function openModal(id) {
+  const s = allStartups.find(x => x.id === id);
+  if (!s) return;
+  const perf = allPerf.find(p => p.startup_id === id);
+  const jobs = allJobs.find(j => j.startup_id === id);
+  const fund = allFunding.filter(f => f.startup_id === id).reduce((t,f) => t+(f.amount_received||0),0);
+  const ver  = allVerifications.find(v => v.startup_id === id);
+  const ms   = allMilestones.filter(m => m.startup_id === id);
+  const done = ms.filter(m => m.status === 'Completed').length;
+  document.getElementById('modal-name').textContent = s.name;
+  document.getElementById('modal-meta').textContent = `${s.dic_id} · ${s.cohort||''} · ${s.sector||''}`;
+  const fields = [
+    ['Stage', s.stage||'—'], ['Status', s.status||'—'],
+    ['Risk Level', s.risk_level||'—'], ['Program', s.program||'—'],
+    ['Founder', s.founder_name||'—'], ['Program Owner', s.program_owner||'—'],
+    ['Monthly Revenue', perf ? fmt(perf.monthly_revenue||0) : '—'],
+    ['Funding Raised', fmt(fund)],
+    ['Total Jobs', jobs ? (jobs.fulltime||0)+(jobs.parttime||0)+(jobs.interns||0)+(jobs.contractors||0) : '—'],
+    ['Runway', perf?.runway_months ? perf.runway_months + ' months' : '—'],
+    ['Milestones', `${done} / ${ms.length} completed`],
+    ['Verification', ver?.verify_status||'Unverified']
+  ];
+  document.getElementById('modal-grid').innerHTML = fields.map(([l,v]) => `
+    <div class="modal-field"><label>${l}</label><p>${v}</p></div>
+  `).join('');
+  document.getElementById('modal').classList.add('open');
+}
+document.getElementById('close-modal').addEventListener('click', () => document.getElementById('modal').classList.remove('open'));
+document.getElementById('modal').addEventListener('click', e => { if (e.target === document.getElementById('modal')) document.getElementById('modal').classList.remove('open'); });
+
+// ── Filter events ──────────────────────────────────────────
+['f-cohort','f-program','f-sector','f-stage','f-risk','f-month','global-search'].forEach(id => {
+  document.getElementById(id).addEventListener('input', render);
+});
+document.getElementById('reset-filters').addEventListener('click', () => {
+  ['f-cohort','f-program','f-sector','f-stage','f-risk','f-month','global-search'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  render();
+});
+
+// ── Realtime subscription ──────────────────────────────────
+supabase.channel('dashboard-live')
+  .on('postgres_changes', { event: '*', schema: 'public', table: 'monthly_performance' }, loadData)
+  .on('postgres_changes', { event: '*', schema: 'public', table: 'startups' }, loadData)
+  .on('postgres_changes', { event: '*', schema: 'public', table: 'milestones' }, loadData)
+  .on('postgres_changes', { event: '*', schema: 'public', table: 'funding' }, loadData)
+  .on('postgres_changes', { event: '*', schema: 'public', table: 'jobs' }, loadData)
+  .subscribe();
+
+// ── Init ───────────────────────────────────────────────────
+await loadData();
+</script>
+</body>
+</html>
